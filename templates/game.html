@@ -1,45 +1,169 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container base-content game-page">
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="row text-center game-padding">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Software</title>
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/bootstrap-4.3.1/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/aos-animation/aos.css') }}">
 
-    <div class="col-md-12">
-      <h2 class="question-number">Question {{riddle_index + 1}}:</h2>
+  <!-- fonts -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/ep-icon-fonts/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fontawesome-5/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/typography-font/typo-fonts.css') }}">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body style="margin-top: -70px;">
+<div class="site-wrapper">
+    <div class="preloader-wrap">
+        <div class="berlin-cube-grid">
+            <div class="berlin-cube berlin-cube1"></div>
+            <div class="berlin-cube berlin-cube2"></div>
+            <div class="berlin-cube berlin-cube3"></div>
+            <div class="berlin-cube berlin-cube4"></div>
+            <div class="berlin-cube berlin-cube5"></div>
+            <div class="berlin-cube berlin-cube6"></div>
+            <div class="berlin-cube berlin-cube7"></div>
+            <div class="berlin-cube berlin-cube8"></div>
+            <div class="berlin-cube berlin-cube9"></div>
+        </div>
     </div>
 
-    <div class="col-md-12">
-      <h3 class="riddle"> {{ riddles[riddle_index] }} </h3>
+    <!-- Banner Section -->
+    <section class="hero-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8 col-md-10">
+                    <div class="hero-content">
+                    	<h5 class="title" style="margin-bottom:20px;margin-top:-30px;">Question {{riddle_index + 1}}:</h5>
+                        <p >Write the letter or word exactly as shown below!</p>
+                        <h1 class="title" style="font-size: 150px;"> {{ riddles[riddle_index] }} </h1>
+                        
+                        <div class="hero-btn">
+                            <a href="#" class="btn btn--primary hvr-shine">Retake</a>
+                            <span class="text--info">Attempts remaining: {{remaining_attempts}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+
+                    <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
+                        <img style="margin-top: -50px;" src="{{ url_for('static', filename='image/dashboard-analytics.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="hero-shape"><img src="image/hero-shape.png" alt=""></div> -->
+    </section>
+
+    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player {lottiePlayer} src="https://assets4.lottiefiles.com/packages/lf20_agw0Fx.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;" autoplay></lottie-player> -->
+
+
+    <!-- Feature Section -->
+    <div class="feature-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-9 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay="300">
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-1"></span>
+                            <span class="outer-circle circle-bg-1"></span>
+                        </div>
+                        <div class="widget__body">
+                            <h3 class="widget__heading h6">Single Platform</h3>
+                            <p>Create custom landing pages with Berlin that convert more visitors than any website.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-6 col-lg-4"  data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='800'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-2"></span>
+                            <span class="outer-circle circle-bg-2"></span>
+                        </div>
+                        <div class="widget__body">
+                            <h3 class="widget__heading h6">Faster Communication</h3>
+                            <p>Create custom landing pages with Berlin that convert more visitors than any website.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-12 form-content text-center">
-      <form method="POST" class="form-actual">
-        <input type="text" class="form-control" name="answer" id="answer" autofocus>
-        <input type="hidden" name="riddle_index" id="riddle_index" value={{riddle_index}}>
-        <br>
-        <button class="btn btn-dark hvr-round-corners">Submit</button>
-      </form>
-    </div>
 
-    <div class="col-md-12">
-      <h4>Attempts remaining: {{remaining_attempts}}</h4>
-    </div>
-
-  </div>
-
+    <!-- Footer Section -->
+    <footer class="section-padding-top footer-bg shape-holder">
+        <div class="container">
+            <div class="copyright-area pt--60 pt-md--80 pb--40">
+                <div class="row align-items-center space-db--10">
+                        <div class="col-lg-2 offset-lg-2 col-md-3 order-md-3 mb--10">
+                        <ul class="footer-list social-list">
+                            <li><a href=""><i class="icon icon-logo-twitter"></i></a></li>
+                            <li><a href=""><i class="icon icon-logo-fb-simple"></i></a></li>
+                            <li><a href=""><i class="icon icon-google"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 col-md-5 col-sm-7 order-md-2 mb--10">
+                        <ul class="footer-list list-inline">
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">Terms & Conditions</a></li>
+                            <li><a href="">Site map</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-5 order-md-1  mb--10">
+                        <p class="mb-0">© 2019 Grayic. All rights reserved</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-shapes">
+                <div class="shape-1">
+                    <img src="{{ url_for('static', filename='image/footer-shape.svg') }}" alt="">
+                </div>
+                <div class="shape-2">
+                    <!-- <img src="./image/footer-shape-white.svg" alt=""> -->
+                </div>
+        </div>
+    </footer>
 </div>
-<div class="container game-extras">
-  <div class="row fixed-bottom text-center">
 
-    <div class="col-md-6 col-xs-12">
-
+  <div class="container game-extras">
+    <div class="row fixed-bottom text-right">
+      <div class="col-md-6 col-xs-12"></div>
+      <div class="col-md-6 col-xs-12">
+        <h4 style="margin-right:50px;margin-bottom: 50px;"><span style="background-color: white;font-size: 25px;padding:15px;opacity: 0.8;border-radius: 20px;">Current Score: {{ score }}</span></h4>
+      </div>
     </div>
-
-    <div class="col-md-6 col-xs-12">
-      <h4>Current Score:</h4>
-      <p> {{ score }} </p>
-    </div>
-
   </div>
+  
+  <!-- Vendor JS-->
+  <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/bootstrap-4.3.1/js/bootstrap.bundle.js') }}"></script>
 
-</div>
+  <!-- Plugins JS -->
+  <script src="{{ url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/aos-animation/aos.js') }}"></script>
+
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', filename='js/active.js') }}"></script>
+</body>
+
+</html>
+
 {% endblock %}
