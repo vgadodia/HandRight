@@ -11,13 +11,11 @@ app.secret_key = 'some_secret'
 data = []
 
 
-# Good ol' write to file function
 def write_to_file(filename, data):
     with open(filename, "a+") as file:
         file.writelines(data)
 
 
-#This is where the riddles live
 def riddle():
     riddles = []
     with open("data/-riddles.txt", "r") as e:
@@ -27,7 +25,6 @@ def riddle():
     return riddles
 
 
-# This is where the answers for the riddles live
 def riddle_answers():
     answers = []
     with open("data/-answers.txt", "r") as e:
@@ -37,7 +34,6 @@ def riddle_answers():
     return answers
 
 
-# Clear functions for wrong answers and score
 def clear_guesses(username):
     with open("data/user-" + username + "-guesses.txt", "w"):
         return
@@ -47,7 +43,6 @@ def clear_score(username):
         return
 
 
-# Wrong answer handling
 def store_all_attempts(username):
     attempts = []
     with open("data/user-" + username + "-guesses.txt", "r") as incorrect_attempts:
@@ -63,12 +58,10 @@ def attempts_remaining():
     return remaining_attempts
 
 
-# Score gets lower the more attempts used
 def add_to_score():
     round_score = 4 - num_of_attempts()
     return round_score
 
-#Adds all the scores from all riddles to make final score
 def end_score(username):
     with open("data/user-" + username + "-score.txt", "r") as numbers_file:
         total = 0
@@ -79,7 +72,6 @@ def end_score(username):
                 pass
     return total
 
-#Add final score to highscore list after the last riddle
 def final_score(username):
     score = str(end_score(username))
 
@@ -90,7 +82,6 @@ def final_score(username):
     else:
         return
 
-#Used to retrieve scores from highscore file for use on highscore page
 def get_scores():
     usernames = []
     scores = []
