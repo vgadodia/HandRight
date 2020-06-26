@@ -1,0 +1,10 @@
+Write the word "hi" and display it on your webcam.
+Write the word "nice" and display it on your webcam.
+Write the word "funny" and display it on your webcam.
+Write the word "awesome" and display it on your webcam.
+Write the word "difficult" and display it on your webcam.
+Write the word "nonplussed " and display it on your webcam.
+Write the word "literally" and display it on your webcam.
+Write the word "disinterested " and display it on your webcam.
+Write the word "lieutenant " and display it on your webcam.
+Write the word "irregardless " and display it on your webcam.
