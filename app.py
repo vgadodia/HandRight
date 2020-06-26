@@ -1,7 +1,8 @@
 import os
 import sys
 from importlib import reload
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, Response
+from camera import VideoCamera
 
 # Needed for encoding to utf8
 reload(sys)
@@ -113,6 +114,16 @@ def index():
             return redirect(url_for('user', username=username))
     return render_template("index.html", page_title="Home")
 
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(VideoCamera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # USER WELCOME PAGE
 @app.route('/<username>', methods=["GET", "POST"])
