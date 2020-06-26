@@ -48,11 +48,14 @@
                     	<h5 class="title" style="margin-bottom:20px;margin-top:-30px;">Question {{riddle_index + 1}}:</h5>
                         <p >Write the letter or word exactly as shown below!</p>
                         <h1 class="title" style="font-size: 150px;"> {{ riddles[riddle_index] }} </h1>
-                        
-                        <div class="hero-btn">
-                            <a href="#" class="btn btn--primary hvr-shine">Retake</a>
-                            <span class="text--info">Attempts remaining: {{remaining_attempts}}</span>
-                        </div>
+
+                        <form method="POST" class="form-actual">
+                            <div class="hero-btn">
+                                <button><a class="btn btn--primary hvr-shine">Submit</a></button>
+                                <br>
+                                <span class="text--info">Attempts remaining: {{remaining_attempts}}</span>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
