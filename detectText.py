@@ -358,7 +358,7 @@ def detect_text(path):
     response = client.text_detection(image=image)
     texts = response.text_annotations
     # print('Texts:')
-    print(texts[0].description.replace('\n', " "))
+    # return texts[0].description.replace('\n', " "))
 
     # for text in texts:
         # print("THIS", text.description.replace('\n', " "))
@@ -374,6 +374,7 @@ def detect_text(path):
             '{}\nFor more info on error messages, check: '
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
+    return texts[0].description.replace('\n', " ")
     # [END vision_python_migration_text_detection]
 # [END vision_text_detection]
 

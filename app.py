@@ -115,21 +115,25 @@ def index():
             return redirect(url_for('user', username=username))
     return render_template("index.html", page_title="Home")
 
+@app.route('/correct')
+def correct():
+    return "Correct"
+
 def gen(camera):
     while True:
         frame = camera.get_frame()
-        yield (b'--frame\r\n'
+        # yield (b'--frame\r\n'
+        #         b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
+        if frame[1] == False:
+            yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
-        # if frame[1] == False:
-        #     yield (b'--frame\r\n'
-        #         b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
-        # else:
-        #     return (b'--frame\r\n'
-        #         b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
+        else:
+            print("Text: ", frame[2])
+            return (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
 
 @app.route('/video_feed')
 def video_feed():
-    # print(gen(VideoCamera()))
     return Response(gen(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 

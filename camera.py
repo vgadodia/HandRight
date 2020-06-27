@@ -1,4 +1,5 @@
 import cv2
+from detectText import detect_text
 face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_alt2.xml")
 ds_factor=0.6
 
@@ -12,6 +13,7 @@ import time
 import cv2
 import matplotlib.pyplot as plt
 import time
+
 
 def decode_predictions(scores, geometry):
 	# grab the number of rows and columns from the scores volume, then
@@ -97,6 +99,9 @@ class VideoCamera(object):
         frame = self.video.read()
         frame = frame[1]
         isFinished = False
+        string = ""
+
+        # cv2.imwrite('text.png', frame)
 
         # resize the frame, maintaining the aspect ratio
         orig = frame.copy()
@@ -136,19 +141,20 @@ class VideoCamera(object):
             cv2.rectangle(frame, (startX-30, startY-50), (endX+70, endY+20), (0, 255, 0), 2)
 
             cropped = orig[startY-50:endY+20, startX-30:endX+70]
-            # print(len(cropped))
-            # plt.imshow(cropped)
-            if self.i == 10:
+
+            # print(self.i)
+            if self.i > 10:
                 cv2.imwrite('text.png', cropped)
-                isFinished = True
-
-        # show the output frame
-        # cv2.imshow("Text Detection", orig)
-        # key = cv2.waitKey(1) & 0xFF
-
+                string = detect_text('text.png')
+                if string is not None and len(string) > 0:
+                    isFinished = True
+                    # print(string)
+                    string = string.strip()
+                    ret, jpeg = cv2.imencode('.jpg', frame)
+                    return [jpeg.tobytes(), isFinished, string]
 
         ret, jpeg = cv2.imencode('.jpg', frame)
-        return [jpeg.tobytes(), isFinished]
+        return [jpeg.tobytes(), False, string]
 
         # success, image = self.video.read()
         # image=cv2.resize(image,None,fx=ds_factor,fy=ds_factor,interpolation=cv2.INTER_AREA)
