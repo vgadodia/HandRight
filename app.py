@@ -3,7 +3,7 @@ import sys
 from importlib import reload
 from flask import Flask, render_template, redirect, request, url_for, Response
 from camera import VideoCamera
-import camera
+import camera as camera
 
 # Needed for encoding to utf8
 reload(sys)
@@ -12,6 +12,8 @@ app = Flask(__name__)
 app.secret_key = 'some_secret'
 data = []
 
+words = ""
+username = ""
 
 def write_to_file(filename, data):
     with open(filename, "a+") as file:
@@ -119,7 +121,12 @@ def index():
 def correct():
     return "Correct"
 
+
+finalAnswer ="wrong"
+
 def gen(camera):
+    global words
+    print("working")
     while True:
         frame = camera.get_frame()
         # yield (b'--frame\r\n'
@@ -129,8 +136,12 @@ def gen(camera):
                 b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
         else:
             print("Text: ", frame[2])
-            return (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
+            finalAnswer="right"
+            words = frame[2]
+            # break
+            # return (b'--frame\r\n'
+            #     b'Content-Type: image/jpeg\r\n\r\n' + frame[0] + b'\r\n\r\n')
+    # redirect("/")
 
 @app.route('/video_feed')
 def video_feed():
@@ -153,10 +164,10 @@ def user(username):
     return render_template("welcome.html",
                             username=username)
 
-
 # GAME PAGE
 @app.route('/<username>/game', methods=["GET", "POST"])
 def game(username):
+    global words
 
     remaining_attempts = 3
     riddles = riddle()
@@ -196,7 +207,8 @@ def game(username):
 
     return render_template("game.html",
                             username=username, riddle_index=riddle_index, riddles=riddles,
-                            answers=answers, attempts=store_all_attempts(username), remaining_attempts=attempts_remaining(), score=end_score(username))
+                            answers=answers, attempts=store_all_attempts(username), remaining_attempts=attempts_remaining(), score=end_score(username),
+                            response=words)
 
 
 # GAMEOVER PAGE

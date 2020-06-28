@@ -60,8 +60,28 @@
         bottom: 30px;
         font-size: 17px;
       }
+      #snackbar2 {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+      }
 
       #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+      #snackbar2.show {
         visibility: visible;
         -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
         animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -130,14 +150,14 @@
       </div>
 
       <!-- Banner Section -->
-      <section class="hero-area">
+      <section class="hero-area" style = "height:110vh;">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-10">
               <div class="hero-content">
                 <h5
                   class="title"
-                  style="margin-bottom: 20px; margin-top: -30px;"
+                  style="margin-bottom: 10px; margin-top: -30px;"
                 >
                   Question {{riddle_index + 1}}:
                 </h5>
@@ -145,8 +165,12 @@
                 <h1 class="title" style="font-size: 150px;">
                   {{ riddles[riddle_index] }}
                 </h1>
+                <div class="col-md-12">
+                  <h4>Attempts remaining: {{remaining_attempts}}</h4>
+                </div>
+            
 
-                <form method="POST" class="form-actual">
+                <!-- <form method="POST" class="form-actual">
                   <div class="hero-btn">
                     <button>
                       <a class="btn btn--primary hvr-shine">Submit</a>
@@ -156,7 +180,7 @@
                       >Attempts remaining: {{remaining_attempts}}</span
                     >
                   </div>
-                </form>
+                </form> -->
               </div>
             </div>
 
@@ -180,73 +204,37 @@
 
       <!-- Feature Section -->
       <div class="feature-section">
-        <button onclick="myFunction()">Failure Button</button>
-        <div id="snackbar">Wrong Answer! Try Again.</div>
+
+        <div class="col-md-12 form-content text-center">
+          <form method="POST" class="form-actual">
+            <input type="text" class="form-control" name="answer" id="answer" value = {{response}} autofocus>
+            <input type="hidden" name="riddle_index" id="riddle_index" value={{riddle_index}}>
+            <br>
+            <button class="btn btn-dark hvr-round-corners" onclick="myFunction()">send</button>
+          </form>
+        </div>
+
         <script>
           function myFunction() {
-            var x = document.getElementById("snackbar");
-            x.className = "show";
-            setTimeout(function () {
-              x.className = x.className.replace("show", "");
-            }, 3000);
+              var x = document.getElementById("snackbar");
+              x.className = "show";
+              setTimeout(function () {
+                x.className = x.className.replace("show", "");
+              }, 9000);
+            
           }
         </script>
 
-        <div class="container">
-          <div class="row justify-content-center">
-            <div
-              class="col-sm-9 col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-duration="1500"
-              data-aos-once="true"
-              data-aos-delay="300"
-            >
-              <div class="widget01 feature--widget">
-                <div class="widget__icon">
-                  <span class="inner-circle circle-bg-1"></span>
-                  <span class="outer-circle circle-bg-1"></span>
-                </div>
-                <div class="widget__body">
-                  <h3 class="widget__heading h6">Single Platform</h3>
-                  <p>
-                    Create custom landing pages with Berlin that convert more
-                    visitors than any website.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="col-sm-9 col-md-6 col-lg-4"
-              data-aos="fade-up"
-              data-aos-duration="1500"
-              data-aos-once="true"
-              data-aos-delay="800"
-            >
-              <div class="widget01 feature--widget">
-                <div class="widget__icon">
-                  <span class="inner-circle circle-bg-2"></span>
-                  <span class="outer-circle circle-bg-2"></span>
-                </div>
-                <div class="widget__body">
-                  <h3 class="widget__heading h6">Faster Communication</h3>
-                  <p>
-                    Create custom landing pages with Berlin that convert more
-                    visitors than any website.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Footer Section -->
-      <footer class="section-padding-top footer-bg shape-holder">
+      <footer class="section-padding-top footer-bg shape-holder" style="height:2vh;">
+        © 2020 Team. All rights reserved
         <div class="container">
           <div class="copyright-area pt--60 pt-md--80 pb--40">
             <div class="row align-items-center space-db--10">
               <div class="col-lg-2 offset-lg-2 col-md-3 order-md-3 mb--10">
-                <ul class="footer-list social-list">
+                <!-- <ul class="footer-list social-list">
                   <li>
                     <a href=""><i class="icon icon-logo-twitter"></i></a>
                   </li>
@@ -256,24 +244,24 @@
                   <li>
                     <a href=""><i class="icon icon-google"></i></a>
                   </li>
-                </ul>
+                </ul> -->
               </div>
               <div
                 class="col-lg-4 offset-lg-1 col-md-5 col-sm-7 order-md-2 mb--10"
               >
-                <ul class="footer-list list-inline">
+                <!-- <ul class="footer-list list-inline">
                   <li><a href="">Privacy Policy</a></li>
                   <li><a href="">Terms & Conditions</a></li>
                   <li><a href="">Site map</a></li>
-                </ul>
+                </ul> -->
               </div>
               <div class="col-lg-3 col-md-4 col-sm-5 order-md-1 mb--10">
-                <p class="mb-0">© 2019 Grayic. All rights reserved</p>
+                <p class="mb-0" style="top: 0;">© 2020 Team. All rights reserved</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer-shapes">
+        <div class="footer-shapes" >
           <div class="shape-1">
             <img
               src="{{ url_for('static', filename='image/footer-shape.svg') }}"
@@ -288,10 +276,10 @@
     </div>
 
     <div class="container game-extras">
-      <div class="row fixed-bottom text-right">
+      <div class="row fixed-top text-right">
         <div class="col-md-6 col-xs-12"></div>
         <div class="col-md-6 col-xs-12">
-          <h4 style="margin-right: 50px; margin-bottom: 50px;">
+          <h4 style="margin-right: 50px; margin-bottom: 0px;margin-top: 80px;">
             <span
               style="
                 background-color: white;
@@ -318,6 +306,9 @@
 
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/active.js') }}"></script>
+    
+    <div id="snackbar">Right Answer! Great Job.</div>
+
   </body>
 </html>
 

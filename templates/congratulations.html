@@ -2,9 +2,16 @@
 <div class="container base-content">
     <div class="row justify-content-center">
         <div class="col text-center">
-            <h1>CONGRATULATIONS {{ username.upper() }}!</h1>
+            <br/><br/><br/><br/><br/><br/><br/>            <br/>
+
+
+            <h1>Congratulations {{ username.upper() }}!</h1>
+            <br/>
+
             <p>You made it to the end.</p>
-            <p>Your final score was {{ score }}</p>
+      
+
+            <p>Your final score was <b>{{ score }} points</b></p>
             <form method="POST">
                 <input type="hidden" name="highscores" value="highscores">
                 <button class="btn btn-dark hvr-round-corners">Highscores</button>
