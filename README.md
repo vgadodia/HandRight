@@ -1,4 +1,4 @@
-# HandRight - HackMann 2020 Project
+# HandRight
 ### A link to our youtube demo - https://www.youtube.com/watch?v=vhN4BqN2lqU&t=4s
 
 ## Inspiration
